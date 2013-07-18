@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Hashi.Bson
 {
-	public class BsonTextParser
+	class BsonTextParser
 	{
 		TextReader mReader;
 
@@ -14,12 +14,17 @@ namespace Hashi.Bson
 			mReader = reader;
 		}
 
-		public BsonObject Parse()
+		public BsonValue Parse()
 		{
-			if (GetNextToken().Type != JsonTokenType.OpenCurly)
-				return null;
+			JsonToken token = GetNextToken();
 
-			return ReadObject();
+			if (token.Type == JsonTokenType.OpenCurly)
+				return new BsonValue(ReadObject());
+
+			if (token.Type == JsonTokenType.OpenSquare)
+				return new BsonValue(ReadArray());
+
+			return new BsonValue(null);
 		}
 
 		BsonObject ReadObject()

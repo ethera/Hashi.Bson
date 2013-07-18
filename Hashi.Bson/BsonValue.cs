@@ -76,6 +76,13 @@ namespace Hashi.Bson
 
             return mValue.ToString();
         }
+
+		public static BsonValue FromJson(string text)
+		{
+			var parser = new BsonTextParser(new StringReader(text));
+
+			return parser.Parse();
+		}
     }
 }
 

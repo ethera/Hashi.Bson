@@ -118,14 +118,6 @@ namespace Hashi.Bson
             
             return obj;
         }
-
-		public static BsonObject Parse(string text)
-		{
-			var reader = new StringReader(text);
-			var parser = new BsonTextParser(reader);
-
-			return parser.Parse();
-		}
     }
 }
 
