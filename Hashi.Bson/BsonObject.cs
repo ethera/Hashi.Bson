@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Hashi.Bson
 {
-    public class BsonObject
+    public class BsonObject : IEnumerable
     {
         Dictionary<string, BsonValue> mDictionary = new Dictionary<string, BsonValue>();
         
@@ -15,6 +15,11 @@ namespace Hashi.Bson
         }
 
         public int Count { get { return mDictionary.Count; } }
+
+		public IEnumerator GetEnumerator()
+		{
+			return mDictionary.GetEnumerator();
+		}
         
         public BsonObject Put(string key, object obj)
         {
@@ -71,7 +76,11 @@ namespace Hashi.Bson
                 builder.Append(", ");
             }
 
-            builder.Remove(builder.Length - 2, 2);
+			if (mDictionary.Count > 0)
+			{
+            	builder.Remove(builder.Length - 2, 2);
+			}
+
             builder.Append(" }");
 
             return builder.ToString();
