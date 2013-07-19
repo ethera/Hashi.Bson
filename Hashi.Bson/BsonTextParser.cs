@@ -45,11 +45,17 @@ namespace Hashi.Bson
 
 				JsonToken value = GetNextToken();
 				if (value.Type == JsonTokenType.OpenCurly)
+				{
 					obj.Put((string)name.Value, ReadObject());
-				if (value.Type == JsonTokenType.OpenSquare)
+				}
+				else if (value.Type == JsonTokenType.OpenSquare)
+				{
 					obj.Put((string)name.Value, ReadArray());
-
-				obj.Put((string)name.Value, value.Value);
+				}
+				else
+				{
+					obj.Put((string)name.Value, value.Value);
+				}
 
 				JsonToken comma = GetNextToken();
 				if (comma.Type == JsonTokenType.CloseCurly)
@@ -72,11 +78,17 @@ namespace Hashi.Bson
 					break;
 
 				if (value.Type == JsonTokenType.OpenCurly)
+				{
 					arr.Add(ReadObject());
-				if (value.Type == JsonTokenType.OpenSquare)
+				}
+				else if (value.Type == JsonTokenType.OpenSquare)
+				{
 					arr.Add(ReadArray());
-
-				arr.Add(value.Value);
+				}
+				else
+				{
+					arr.Add(value.Value);
+				}
 
 				JsonToken comma = GetNextToken();
 				if (comma.Type == JsonTokenType.CloseSquare)
