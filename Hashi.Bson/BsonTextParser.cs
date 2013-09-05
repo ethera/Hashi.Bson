@@ -219,7 +219,7 @@ namespace Hashi.Bson
 
 				builder.Append(c1);
 
-				while (PeekNextChar() != -1 && !SpecialCharacters.ContainsKey((char)PeekNextChar()))
+				while (PeekNextChar() != null && !SpecialCharacters.ContainsKey((char)PeekNextChar()))
 				{
 					char? c2 = ReadStringChar();
 					if (c2 == null)
