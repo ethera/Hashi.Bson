@@ -47,6 +47,14 @@ namespace Hashi.Bson
             return this;
         }
 
+		public bool IsNull(int idx)
+		{
+			if (idx < 0 || idx >= Count)
+				throw new BsonArrayOutOfIndexException();
+
+			return mArray[idx].Type == BsonValueType.Null;
+		}
+
         public object Get(int idx)
         {
             if (idx < 0 || idx >= Count)

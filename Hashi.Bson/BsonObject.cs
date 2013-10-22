@@ -38,6 +38,14 @@ namespace Hashi.Bson
             return mDictionary.ContainsKey(key);
         }
 
+		public bool IsNull(string key)
+		{
+			if (!mDictionary.ContainsKey(key))
+				throw new BsonObjectKeyNotFoundException();
+
+			return mDictionary[key].Type == BsonValueType.Null;
+		}
+
         public object Get(string key)
         {
             if (!mDictionary.ContainsKey(key))
