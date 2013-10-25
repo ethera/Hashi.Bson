@@ -70,8 +70,7 @@ namespace Hashi.Bson
 
             foreach (var item in mDictionary)
             {
-                builder.Append(item.Key);
-                builder.Append(": ");
+				builder.Append(String.Format("\"{0}\": ", item.Key));
                 if (item.Value.Type == BsonValueType.String)
                 {
                     builder.Append("\"");
